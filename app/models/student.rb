@@ -1,4 +1,6 @@
 class Student < ApplicationRecord
   belongs_to :school
-  has_and_belongs_to_many :subjects
+  
+  has_many :enrollments
+  has_many :subjects, :through => :enrollments
 end
