@@ -10,14 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_22_034542) do
+ActiveRecord::Schema.define(version: 2020_09_22_044708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "Students_Subjects", id: false, force: :cascade do |t|
-    t.bigint "Student_id", null: false
-    t.bigint "Subject_id", null: false
+  create_table "enrollments", id: false, force: :cascade do |t|
+    t.bigint "subject_id"
+    t.bigint "student_id"
+    t.index ["student_id"], name: "index_enrollments_on_student_id"
+    t.index ["subject_id"], name: "index_enrollments_on_subject_id"
   end
 
   create_table "schools", force: :cascade do |t|

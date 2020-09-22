@@ -1,4 +1,4 @@
 class School < ApplicationRecord
-  enum name: [:University_of_Science]
+  enum name: [:university_of_science]
   
 end
