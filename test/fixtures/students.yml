@@ -1,9 +1,0 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  student_id: MyString
-  school: one
-
-two:
-  student_id: MyString
-  school: two
