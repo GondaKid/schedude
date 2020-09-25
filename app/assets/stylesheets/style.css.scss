@@ -7,9 +7,28 @@ body {
   background-color: #f2f3f8;
 }
 
+header
+{
+  .navbar
+  {
+    background-color: #563d7c;
+  }
+}
+
+footer {
+  width: 100%;
+  height: 80px;
+  position: relative; //make relative instead of absolute
+  bottom: 0;
+  left: 0;
+  background-color: #563d7c;
+}
+
 /* Wizard */
 
 .wizard {
+  padding-top: 50px;
+
   a:hover {
     text-decoration: none;
   }
@@ -35,8 +54,8 @@ body {
       margin-bottom: 0;
 
       li {
-        width: 270px;
-        max-width: calc(25% - 6px);
+        width: 370px;
+        max-width: calc(33% - 6px);
 
         a {
           display: inline-block;
@@ -44,7 +63,7 @@ body {
           height: 100%;
           border-top-left-radius: 10px;
           border-top-right-radius: 10px;
-          background-color: rgba(153, 155, 163, 0.1);
+          background-color: #e7bfff;
           padding: 28px 30px 24px;
 
           @media (max-width: 767px) {
@@ -88,7 +107,7 @@ body {
         .bd-wizard-step-subtitle {
           line-height: 1;
           font-size: 14px;
-          color: #c8c8c8;
+          color: rgb(0, 0, 0);
 
           @media (max-width: 767px) {
             display: none;
@@ -99,13 +118,13 @@ body {
         &.done {
           .bd-wizard-step-icon {
             background-color: #4a2950;
-            color: #fff;
+            color: #ccc;
           }
         }
 
         &.current {
           a {
-            background-color: #fff;
+            background-color: #d782ff;
           }
         }
       }
@@ -137,6 +156,7 @@ body {
       //font-weight: bold;
       color: #030303;
       margin-bottom: 22px;
+      font-size: 3vw;
     }
 
     p {
@@ -149,10 +169,10 @@ body {
       min-height: 50px;
       //max-width: 550px;
       border-radius: 4px;
-      border: solid 1px #ececec;
+      border: solid 0.5px #f2bafd;
 
       &::placeholder {
-        color: #919aa3;
+        color: #494949;
       }
     }
 
@@ -186,7 +206,7 @@ body {
       a {
         display: inline-block;
         border-radius: 6px;
-        background-color: #00d69f;
+        background-color: #4a2950;
         padding: 16px 30px;
         color: #fff;
         font-style: 15px;
