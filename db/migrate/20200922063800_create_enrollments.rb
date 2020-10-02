@@ -5,3 +5,4 @@ class CreateEnrollments < ActiveRecord::Migration[6.0]
     add_column :enrollments, :updated_at, :datetime, null: false
   end
 end
+    
