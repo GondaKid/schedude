@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get 'welcome/index'
 
-  resources :students
+  resources :students do
+    resources :schedules
+  end
 
-  root 'welcome#index'
+  root 'students#new'
 end
