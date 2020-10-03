@@ -1,6 +1,11 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.14.1"
 
+set :default_env, {
+  "RAILS_ENV" => "production",
+  "RAILS_MASTER_KEY" => ENV["RAILS_MASTER_KEY"]
+}
+
 set :application, "schedude"
 set :repo_url, "git@github.com:GondaKid/schedude.git"
 set :pty, true
@@ -30,4 +35,5 @@ set :puma_workers, 0
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true
 set :puma_preload_app, false
+
 
