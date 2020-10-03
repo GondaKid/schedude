@@ -7,6 +7,12 @@ set :pty, true
 set :linked_files, %w(config/database.yml config/application.yml)
 set :linked_dirs, %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads)
 set :keep_releases, 5
+
+# rbenv setup
+set :rbenv_type, :user # or :system, or :fullstaq (for Fullstaq Ruby), depends on your rbenv setup
+set :rbenv_ruby, File.read('.ruby-version').strip
+set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
+set :rbenv_roles, :all # default value
 set :rbenv_map_bins, %w(rake gem bundle ruby rails puma pumactl sidekiq sidekiqctl)
 
 set :puma_rackup, -> {File.join(current_path, "config.ru")}
