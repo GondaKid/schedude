@@ -33,5 +33,12 @@ group :test do
   gem 'webdrivers'
 end
 
+group :production do
+  gem "capistrano"
+  gem "capistrano3-puma"
+  gem "capistrano-rails", require: false
+  gem "capistrano-bundler", require: false
+end
+
 gem 'font-awesome-sass', '~> 5.13'
 gem 'kaminari'
