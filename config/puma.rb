@@ -19,7 +19,7 @@ port        ENV.fetch("PORT") { 3000 }
 # server puma setting
 environment "production"
 
-shared_dir = "/deploy/apps/schedude/shared"
+shared_dir = "deploy/apps/schedude/shared"
 
 # Set up socket location
 bind "unix://#{shared_dir}/tmp/sockets/puma.sock"
