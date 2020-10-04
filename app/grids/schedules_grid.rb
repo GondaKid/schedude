@@ -5,15 +5,13 @@ class SchedulesGrid < BaseGrid
   end
 
   # Filters
-
   filter(:name, :string)
-  filter(:details, :string)
+  filter(:code, :string)
   filter(:time, :string)
 
   # Columns
-
   column(:name, :mandatory => true)
-  column(:details, :mandatory => true)
+  column(:code, :mandatory => true)
   column(:time, :mandatory => true)
 
 end

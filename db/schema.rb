@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_28_101504) do
+ActiveRecord::Schema.define(version: 2020_10_04_095226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 2020_09_28_101504) do
   create_table "enrollments", id: false, force: :cascade do |t|
     t.bigint "subject_id"
     t.bigint "student_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["student_id"], name: "index_enrollments_on_student_id"
     t.index ["subject_id"], name: "index_enrollments_on_subject_id"
   end
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 2020_09_28_101504) do
 
   create_table "subjects", force: :cascade do |t|
     t.string "name"
+    t.string "code"
     t.string "time"
-    t.string "details"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
