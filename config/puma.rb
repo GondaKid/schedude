@@ -17,6 +17,8 @@ port        ENV.fetch("PORT") { 3000 }
 # plugin :tmp_restart
 
 # server puma setting
+environment "production"
+
 shared_dir = "/deploy/apps/schedude/shared"
 
 # Set up socket location
@@ -29,6 +31,7 @@ stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.std
 pidfile "#{shared_dir}/tmp/pids/puma.pid"
 state_path "#{shared_dir}/tmp/pids/puma.state"
 activate_control_app
+
 workers ENV.fetch("WEB_CONCURRENCY") { 2 }
 
 plugin :tmp_restart
