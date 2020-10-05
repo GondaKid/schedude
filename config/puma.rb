@@ -15,6 +15,7 @@ port        ENV.fetch("PORT") { 3000 }
 # server puma setting
 environment "production"
 shared_dir = ""
+app_dir = File.expand_path("../..", __FILE__)
 
 # Set up socket location
 bind "unix:///deploy/apps/schedude/shared/tmp/sockets/puma.sock"
