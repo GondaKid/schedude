@@ -40,6 +40,14 @@ namespace :puma do
     end
   end
 
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      # execute "cd #{current_path} && #{bundle_path}  pumactl restart -e #{rails_env}"
+      execute "cd #{current_path} && #{fetch(:rbenv_prefix)} bundle exec rails restart"
+    end
+  end
+
   before :start, :make_dirs
 end
 
@@ -52,14 +60,6 @@ namespace :deploy do
     end
   end
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # execute "cd #{current_path} && #{bundle_path}  pumactl restart -e #{rails_env}"
-      execute "cd #{current_path} && #{fetch(:rbenv_prefix)} bundle exec rails restart"
-    end
-  end
-  
   after  :finishing, :cleanup
 end
 
