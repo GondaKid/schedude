@@ -60,3 +60,11 @@ namespace :deploy do
   
   after  :finishing,    :cleanup
 end
+
+# asset config
+set :assets_roles, [:web, :app]
+set :assets_prefix, 'prepackaged-assets'
+set :assets_manifests, ['app/assets/config/manifest.js']
+set :rails_assets_groups, :assets
+set :normalize_asset_timestamps, %w{public/images public/javascripts public/stylesheets}
+set :keep_assets, 2
