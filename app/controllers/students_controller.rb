@@ -2,8 +2,13 @@ class StudentsController < ApplicationController
   def new
 
   end
+<<<<<<< HEAD
 
   def create
+=======
+
+  def create
+>>>>>>> c6a971b03fcdd1c016cf0a36e6fe76b84b464c95
     # @schedule = params[:student][:schedule]
     render plain: params[:student].inspect
     # @student = Student.new student_param
