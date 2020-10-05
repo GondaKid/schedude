@@ -10,6 +10,8 @@ gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
 gem 'bootsnap', '>= 1.4.2', require: false
+# gem for build table-like data in view
+gem 'datagrid', '~> 1.4', '>= 1.4.4'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
@@ -31,4 +33,13 @@ group :test do
   gem 'webdrivers'
 end
 
+group :production do
+  gem "capistrano"
+  gem 'capistrano-rbenv', '~> 2.2'
+  gem "capistrano3-puma"
+  gem "capistrano-rails", require: false
+  gem "capistrano-bundler", require: false
+end
+
 gem 'font-awesome-sass', '~> 5.13'
+gem 'kaminari'

@@ -29,5 +29,13 @@
 yarn-debug.log*
 .yarn-integrity
 
-# Ignore database yaml file
-/config/database.yaml
+# Other
+/config/database.yml
+public/*
+.env
+coverage/
+.rspec
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
