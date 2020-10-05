@@ -1,0 +1,6 @@
+<h1>Schedule#index</h1>
+<%= form_with(url: "/schedule/create", method: "post", local: true) do %>
+<%= label_tag(:d, "Data: ") %>
+<%= text_area_tag(:data) %>
+<%= submit_tag("Process") %>
+<% end %>

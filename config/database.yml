@@ -1,0 +1,26 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: schedude
+  password: schedude
+
+development:
+  <<: *default
+  database: schedude_development
+  username: schedude
+  password: schedude
+  #port: 5432
+
+test:
+  <<: *default
+  database: schedude_test
+
+
+production:
+  <<: *default
+  database: schedude_production
+  username: schedude
+  password: <%= ENV['SCHEDUDE_DATABASE_PASSWORD'] %>
+  username: schedude
+  password: schedude

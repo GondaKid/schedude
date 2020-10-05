@@ -73,7 +73,7 @@ class Student < ApplicationRecord
     list = Array.new(6)
 
     data = get_subject_by_days(parse_data_for_hcmus(data))
-    
+
     # Each days
     data.each_with_index do |v, index|
         next if (v.empty?) || (v.length == 0)

@@ -2,21 +2,21 @@
 <html>
 
 <head>
-  <title>Schedude</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= stylesheet_link_tag 'application','https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title>Schedude</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application','https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
 <body>
-  <div class="contact1">
-    <div class="container-contact1">
-      <%= yield %>
+    <div class="contact1">
+        <div class="container-contact1">
+            <%= yield %>
+        </div>
     </div>
-  </div>
 </body>
 
 </html>
