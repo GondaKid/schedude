@@ -59,5 +59,4 @@ namespace :deploy do
   end
   
   after  :finishing,    :cleanup
-  after  :finishing,    :restart
 end
