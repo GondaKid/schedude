@@ -70,3 +70,5 @@ set :assets_manifests, ['app/assets/config/manifest.js']
 set :rails_assets_groups, :assets
 set :normalize_asset_timestamps, %w{public/images public/javascripts public/stylesheets}
 set :keep_assets, 2
+
+after 'deploy:updated', 'webpacker:precompile'

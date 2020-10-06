@@ -12,6 +12,7 @@ require "capistrano/bundler"
 require "capistrano/rails/migrations"
 require "capistrano/yarn"
 require "capistrano/rails/assets"
+require "capistrano/webpacker/precompile"
 
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
