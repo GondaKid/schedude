@@ -244,8 +244,8 @@ textarea.input1 {
 }
 
 .input1:focus + .shadow-input1 {
-  // -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
-  // animation: anim-shadow 0.5s ease-in-out forwards;
+  -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
+  animation: anim-shadow 0.5s ease-in-out forwards;
 }
 
 @-webkit-keyframes anim-shadow {
