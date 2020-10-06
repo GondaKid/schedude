@@ -1,0 +1,26 @@
+/*
+ *= require bootstrap
+ *= require_tree .
+ *= require datagrid
+ *= require_self
+ */
+
+ @font-face {
+  font-family: Montserrat-Regular;
+  src: asset-url('montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family: Montserrat-Bold;
+  src: asset-url('montserrat/Montserrat-Bold.ttf');
+}
+
+@font-face {
+  font-family: Montserrat-ExtraBold;
+  src: asset-url('montserrat/Montserrat-ExtraBold.ttf');
+}
+
+@font-face {
+  font-family: Montserrat-Medium;
+  src: asset-url('montserrat/Montserrat-Medium.ttf');
+}
