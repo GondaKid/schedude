@@ -76,6 +76,6 @@ end
 
 
 Rake::Task["deploy:assets:precompile"].clear_actions
-after 'deploy:updated', :precompile
+after 'deploy:updated', 'webpacker:precompile'
 
 
