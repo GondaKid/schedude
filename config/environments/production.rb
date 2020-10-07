@@ -16,4 +16,6 @@ Rails.application.configure do
   end
   config.active_record.dump_schema_after_migration = false
 
+  config.assets.digest = true
+
 end
