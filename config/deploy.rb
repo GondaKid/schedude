@@ -71,8 +71,11 @@ namespace :deploy do
   end
 
   after :finishing, :cleanup
-  after :updated, 'webpacker:precompile'
   before :reverted, 'npm:install'
 end
+
+
+Rake::Task["deploy:assets:precompile"].clear_actions
+after 'deploy:updated', :precompile
 
 
