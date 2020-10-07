@@ -75,7 +75,6 @@ namespace :deploy do
 end
 
 
-Rake::Task["deploy:assets:precompile"].clear_actions
 after 'deploy:updated', 'webpacker:precompile'
 
 
