@@ -17,6 +17,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.x.webpacker[:digesting] = true
-  config.assets.digest = true
+  # config.assets.digest = true
 
 end

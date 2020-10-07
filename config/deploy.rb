@@ -75,6 +75,5 @@ namespace :deploy do
 end
 
 
-after 'deploy:updated', 'webpacker:precompile'
 
 
