@@ -1,0 +1,5 @@
+<%= @sche %>
+<%= form_with(method: "get", local: true) do %>
+<%= hidden_field_tag(:data, params[:data]) %>
+<%= submit_tag("Re-Create") %>
+<% end %>
