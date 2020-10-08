@@ -50,14 +50,14 @@ namespace :puma do
     end
   end
 
-  desc 'Restart application'
-  Rake::Task["puma:restart"].clear_actions
-  task :restart do
-    on roles(:app) do
-      invoke 'puma:stop'
-      invoke 'puma:start'
-    end
-  end
+  # desc 'Restart application'
+  # Rake::Task["puma:restart"].clear_actions
+  # task :restart do
+  #   on roles(:app) do
+  #     invoke 'puma:stop'
+  #     invoke 'puma:start'
+  #   end
+  # end
   
   before :start, :make_dirs
 end
