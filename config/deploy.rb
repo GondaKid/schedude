@@ -1,16 +1,12 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.14.1"
 
-set :default_env, {
-  "RAILS_ENV" => "production",
-  "RAILS_MASTER_KEY" => ENV["RAILS_MASTER_KEY"]
-}
 
 set :application, "schedude"
 set :repo_url, "git@github.com:GondaKid/schedude.git"
 
 set :pty, true
-set :linked_files, %w(config/database.yml config/application.yml config/puma.rb config/master.key)
+set :linked_files, %w(config/database.yml config/application.yml config/master.key )
 set :linked_dirs, %w(log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads)
 set :keep_releases, 5
 
@@ -33,6 +29,7 @@ set :puma_workers, 0
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true
 set :puma_preload_app, false
+set :puma_plugins, [:tmp_restart]
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
@@ -40,6 +37,14 @@ namespace :puma do
     on roles(:app) do
       execute "mkdir #{shared_path}/tmp/sockets -p"
       execute "mkdir #{shared_path}/tmp/pids -p"
+    end
+  end
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      # execute "cd #{current_path} && #{bundle_path}  pumactl restart -e #{rails_env}"
+      execute "cd #{current_path} && #{fetch(:rbenv_prefix)} bundle exec rails restart"
     end
   end
 
@@ -55,13 +60,13 @@ namespace :deploy do
     end
   end
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
-    end
-  end
-  
-  after  :finishing,    :cleanup
-  after  :finishing,    :restart
+  after  :finishing, :cleanup
 end
+
+# asset config
+set :assets_roles, [:web, :app]
+set :assets_prefix, 'prepackaged-assets'
+set :assets_manifests, ['app/assets/config/manifest.js']
+set :rails_assets_groups, :assets
+set :normalize_asset_timestamps, %w{public/images public/javascripts public/stylesheets}
+set :keep_assets, 2
