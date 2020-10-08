@@ -53,13 +53,13 @@ namespace :puma do
   desc 'Restart application'
   Rake::Task["puma:restart"].clear_actions
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      execute "cd #{current_path} && #{fetch(:rbenv_prefix)} bundle exec rails restart"
+    on roles(:app) do
+      invoke 'puma:stop'
+      invoke 'puma:start'
     end
   end
-
+  
   before :start, :make_dirs
-
 end
 
 namespace :deploy do
@@ -73,6 +73,8 @@ namespace :deploy do
   after :finishing, :cleanup
   before :reverted, 'npm:install'
 end
+
+after :deploy, "puma:start"
 
 
 
