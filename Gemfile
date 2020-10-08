@@ -5,7 +5,7 @@ ruby '2.7.1'
 
 gem 'rails', '~> 6.0.3', '>= 6.0.3.3'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 3.10.0'
+gem 'puma', '~> 4.1'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
@@ -38,7 +38,7 @@ gem 'kaminari'
 
 gem "capistrano"
 gem 'capistrano-rbenv', '~> 2.2'
-gem "capistrano3-puma", '~> 3.0.3'
+gem "capistrano3-puma"
 gem "capistrano-rails", require: false
 gem "capistrano-bundler", require: false
 # gem "capistrano-yarn"
