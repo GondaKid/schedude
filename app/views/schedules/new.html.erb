@@ -1,5 +1,43 @@
-<%= @sche %>
-<%= form_with(method: "get", local: true) do %>
-<%= hidden_field_tag(:data, params[:data]) %>
-<%= submit_tag("Re-Create") %>
-<% end %>
+<span class="contact1-form-title">
+  YOUR SCHEDUDE
+</span>
+<div class="container">
+    <div class="row mb-3">
+        <a href="#">
+            <i class="fas fa-heart"></i>
+        </a>
+    </div>
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr class="table-primary">
+                    <th scope="col">Subject Code</th>
+                    <th scope="col">Subject Name</th>
+                    <th scope="col">Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @sche.flatten.each do |e| %>
+                        <tr>
+                            <td><%= e[:code] %></td>
+                            <td><%= e[:name] %></td>
+                            <td><%= e[:time] %></td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <a href="#">
+            <i class="fas fa-heart"></i>
+        </a>
+    </div>
+    <div class="row">
+        <%= form_with(method: "get", local: true) do %>
+        <%= hidden_field_tag(:data, params[:data]) %>
+        <%= submit_tag("Re-Create", class: 'contact1-form-btn')%>
+        <% end %>
+    </div>
+</div>
