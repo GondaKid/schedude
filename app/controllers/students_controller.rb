@@ -4,8 +4,9 @@ class StudentsController < ApplicationController
   end
 
   def create
-    #Situation student_id=1 exists, and create schedule for it
-    redirect_to controller: 'schedules', action: 'new', student_id: 1, data: params[:student][:schedule]
+    @student = Student.new(student_param)
+    @student.save
+    redirect_to new_student_schedule_path(@student, raw_schedule: params[:student][:schedule])
   end
 
   def show
@@ -17,7 +18,6 @@ class StudentsController < ApplicationController
 
   private
   def student_param
-    params[:student][:info] = params[:student][:schedule]
-    params.require(:student).permit(:student_id, :info)
+    params.require(:student).permit(:student_id)
   end
 end
