@@ -4,8 +4,6 @@ class SchedulesController < ApplicationController
     @grid = SchedulesGrid.new(grid_params) do |scope|
       scope.joins(:students).joins(:enrollments).where("students.student_id = '#{@student.student_id}'").distinct.page(params[:page])
     end
-
-    render plain: @student.student_id
   end
 
   def create
