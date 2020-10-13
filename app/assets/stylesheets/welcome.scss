@@ -22,7 +22,7 @@ $btn-border-radius: .1875rem;
 @mixin btn-opacity-variant($color) {
   color: #f7f8fa;
   -webkit-text-stroke: .3px #f7f8fa;
-  background-color: lighten($color, 22%);
+  background-color: lighten($color, 12%);
   border: 2px solid transparent;
   transition: all 0.5s ease-in-out;
   &:hover {
