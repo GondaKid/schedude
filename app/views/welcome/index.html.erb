@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Schedude</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+</head>
+
+<body id="body" data-spy="scroll" data-target=".navbar" data-offset="100">
+  <header id="header-section">
+    <nav class="navbar navbar-expand-lg pl-2 pl-sm-0" id="navbar">
+      <div class="container">
+        <div class="navbar-brand-wrapper d-flex w-100 justify-content-center">
+          <%= link_to root_path do %>
+          <%= image_tag  "logo.svg", height: '75', width: '246', :class => "img-icons" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <div class="banner">
+    <div class="container">
+      <h1 class="font-weight-bold">Simple and easy-to-use schedule generator.</h1>
+      <h6 class="font-weight-normal text-muted pt-1 pb-3">Schedude helps saving your time on planning schedule with
+        conflict-free worry.</h6>
+      <div class="">
+        <%=link_to  '<button type="button" class="btn btn-opacity-light">Try Schedule</button>'.html_safe, controller: 'students', action: 'new'%>
+      </div>
+      <%= image_tag  "description.svg", height: '333', width: '444', :class => "img-fluid m-5" %>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <div class="container pb-5 mb-5">
+      <section class="features-overview" id="features-section">
+        <div class="content-header">
+          <h2 class="font-weight-bold">How to Schedude</h2>
+        </div>
+        <div class="d-md-flex justify-content-between">
+          <div class="grid-margin d-flex justify-content-start">
+            <div class="features-width">
+              <%= image_tag  "share.svg", :class => "img-icons" %>
+
+              <h5 class="py-3">Let Schedude<br>know your classes</h5>
+              <p class="text-muted">Copy your available classes and<br>select which class you are interested in.</p>
+            </div>
+          </div>
+          <div class="grid-margin d-flex justify-content-center">
+            <div class="features-width">
+              <%= image_tag  "click.svg", :class => "img-icons" %>
+
+              <h5 class="py-3">One-click<br>generate</h5>
+              <p class="text-muted">Fast and automatically.<br>Re&#8209;generate until you find suitable one.</p>
+            </div>
+          </div>
+          <div class="grid-margin d-flex justify-content-end">
+            <div class="features-width">
+              <%= image_tag  "save.svg", :class => "img-icons" %>
+
+              <h5 class="py-3">Save for later</h5>
+              <p class="text-muted">Your schedule is always here in case you forgot.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+
+  <footer class="border-top d-flex justify-content-center py-3">
+    <a class="github-button" href="https://github.com/GondaKid/schedude" data-color-scheme="no-preference: dark; light: light; dark: dark;" data-size="large" data-show-count="true" aria-label="Star GondaKid/schedude on GitHub">Star</a>
+  </footer>
+
+</body>
+
+</html>

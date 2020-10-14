@@ -5,5 +5,7 @@ Rails.application.routes.draw do
     resources :schedules
   end
 
-  root 'students#new'
+  # root 'students#new'
+  root 'welcome#index'
+
 end

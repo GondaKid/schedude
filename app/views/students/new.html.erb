@@ -4,12 +4,13 @@
 
 <%= form_with scope: :student, url: students_path, class: "contact1-form validate-form", local: true do |f| %>
 <span class="contact1-form-title">
-  SCHEDUDE
+  <%= link_to root_path do %>
+  <%= image_tag  "logo.svg", height: '65', width: '213', :class => "img-icons" %>
+  <% end %>
 </span>
 
 <div class="wrap-input1 validate-input">
   <%= f.text_field :student_id , class: 'input1', placeholder: 'Student ID'%>
-  <span class="shadow-input1"></span>
 </div>
 
 <div class="wrap-input1 validate-input">
