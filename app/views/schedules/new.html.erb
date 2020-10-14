@@ -1,33 +1,37 @@
-<span class="contact1-form-title">
-    YOUR SCHEDUDE
-</span>
-<div class="container">
-    <div class="row">
+<div class="contact1">
+  <div class="container-contact1">
+    <span class="contact1-form-title">
+      YOUR SCHEDUDE
+    </span>
+    <div class="container">
+      <div class="row">
         <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <thead>
-                    <tr class="table-primary">
-                        <th scope="col">Subject Code</th>
-                        <th scope="col">Subject Name</th>
-                        <th scope="col">Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% @sche.flatten.each do |e| %>
-                    <tr>
-                        <td><%= e[:code_name] %></td>
-                        <td><%= e[:name] %></td>
-                        <td><%= e[:time] %></td>
-                    </tr>
-                    <% end %>
-                </tbody>
-            </table>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr class="table-primary">
+                <th scope="col">Subject Code</th>
+                <th scope="col">Subject Name</th>
+                <th scope="col">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @sche.flatten.each do |e| %>
+              <tr>
+                <td><%= e[:code_name] %></td>
+                <td><%= e[:name] %></td>
+                <td><%= e[:time] %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
-    </div>
-    <div class="row mb-3">
+      </div>
+      <div class="row mb-3">
         <%= link_to raw('<i class="fas fa-heart"></i>'), student_schedules_path(@student, schedule: @sche.flatten), data: { method: :post }%>
-    </div>
-    <div class="row">
+      </div>
+      <div class="row">
         <a href="#" class="contact1-form-btn">Re-Create</a>
+      </div>
     </div>
+  </div>
 </div>

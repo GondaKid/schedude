@@ -1,8 +1,12 @@
-<div class="mx-auto d-flex flex-column">
-  <div class="mx-auto mb-5">
-    <h3 class="text-center"><%= @student.student_id%>'s Schedule</h3>
+<div class="contact1">
+  <div class="container-contact1">
+    <div class="mx-auto d-flex flex-column">
+      <div class="mx-auto mb-5">
+        <h3 class="text-center"><%= @student.student_id%>'s Schedule</h3>
+      </div>
+      <%= paginate(@grid.assets) %>
+      <%= datagrid_table @grid %>
+      <%= paginate(@grid.assets) %>
+    </div>
   </div>
-  <%= paginate(@grid.assets) %>
-  <%= datagrid_table @grid %>
-  <%= paginate(@grid.assets) %>
 </div>

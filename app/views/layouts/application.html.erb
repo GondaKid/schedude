@@ -6,16 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <%= stylesheet_link_tag 'application','https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= favicon_link_tag asset_path('favicon.ico'), :rel => 'icon', :type => 'image/x-icon' %>
+  <%= favicon_link_tag asset_path('favicon-16x16.png'), :rel => 'icon', :type => 'image/png' %>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 </head>
 
 <body>
-  <div class="contact1">
-    <div class="container-contact1">
-      <%= yield %>
-    </div>
-  </div>
+  <%= yield %>
 </body>
 
 </html>
