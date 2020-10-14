@@ -2,29 +2,6 @@
 @import "font-awesome";
 
 /*//////////////////////////////////////////////////////////////////
-[ FONT ]*/
-
-@font-face {
-  font-family: Montserrat-Regular;
-  src: url('montserrat/Montserrat-Regular.ttf');
-}
-
-@font-face {
-  font-family: Montserrat-Bold;
-  src: url('montserrat/Montserrat-Bold.ttf');
-}
-
-@font-face {
-  font-family: Montserrat-ExtraBold;
-  src: url('montserrat/Montserrat-ExtraBold.ttf');
-}
-
-@font-face {
-  font-family: Montserrat-Medium;
-  src: url('montserrat/Montserrat-Medium.ttf');
-}
-
-/*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 
 * {
@@ -232,20 +209,6 @@ textarea.input1 {
   color: #666666;
 }
 
-
-@-webkit-keyframes anim-shadow {
-  to {
-    box-shadow: 0px 0px 80px 30px;
-    opacity: 0;
-  }
-}
-
-@keyframes anim-shadow {
-  to {
-    box-shadow: 0px 0px 80px 30px;
-    opacity: 0;
-  }
-}
 
 /*---------------------------------------------*/
 

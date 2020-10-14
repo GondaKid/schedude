@@ -41,4 +41,4 @@ gem 'capistrano-rbenv', '~> 2.2'
 gem "capistrano3-puma"
 gem "capistrano-rails", require: false
 gem "capistrano-bundler", require: false
-gem "capistrano-yarn"
+# gem "capistrano-yarn"
