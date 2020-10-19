@@ -30,9 +30,8 @@ class SchedulesController < ApplicationController
 
   def save_all_subject raw_schedule
     Student.new.get_subject_by_days(raw_schedule).flatten.each do |s|
-      formated_time = s[:on] << "(" << s[:time].begin.to_s << "-" << s[:time].end.to_s << ")"
-      if Subject.find_by(code: s[:code], name: s[:name], time: formated_time).nil?
-        Subject.create(code: s[:code], name: s[:name], time: formated_time)
+      if Subject.find_by(code: s[:code], name: s[:name], time: s[:full_time]).nil?
+        Subject.create(code: s[:code], name: s[:name], time: s[:full_time])
       end
     end
   end

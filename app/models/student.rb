@@ -22,6 +22,7 @@ class Student < ApplicationRecord
         subject_info[:name] = lines[1]
         subject_info[:on] = times[0]
         subject_info[:time]= times[1].split("-").first.to_i..times[1].split("-").last.to_i
+        subject_info[:full_time] = lines[7].match(/.+?(?=-P)/)[0]
 
         result << subject_info
       end
@@ -66,7 +67,7 @@ class Student < ApplicationRecord
     list = Array.new(6)
     # Each days
     data.each_with_index do |v, index|
-      next if (v.empty?) || (v.length == 0)
+      next if (v.empty?) || (v.nil?)
       result = Array.new
       clone = v
       sbj = clone[rand(clone.count)]
@@ -106,16 +107,6 @@ class Student < ApplicationRecord
         result.each { |e| data = delete_by_subject_name(e[:name], data) }
       end
       list[index] = result
-    end
-
-    #Re-Format list
-    list.each do |t|
-      t.each do |e|
-        e[:time] = e[:on] <<"(" << e[:time].begin.to_s << "-" <<
-        e[:time].end.to_s << ")"
-        e.delete(:on)
-        e.delete(:room)
-      end
     end
 
     list

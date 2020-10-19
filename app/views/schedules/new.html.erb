@@ -14,10 +14,11 @@
                 </thead>
                 <tbody>
                     <% @sche.flatten.each do |e| %>
+                    <% next if (e.nil?) || (e.empty?) %>
                     <tr>
                         <td><%= e[:code_name] %></td>
                         <td><%= e[:name] %></td>
-                        <td><%= e[:time] %></td>
+                        <td><%= e[:full_time] %></td>
                     </tr>
                     <% end %>
                 </tbody>
