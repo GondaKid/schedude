@@ -9,7 +9,7 @@ class SchedulesController < ApplicationController
   def create
     @student = Student.find params[:student_id]
     schedule = params[:schedule]
-    schedule.flatten.each do |s|
+    schedule.each do |s|
       subject = Subject.create(code: s[:code], name: s[:name], time: s[:time])
       @student.subjects << subject
     end
@@ -21,7 +21,6 @@ class SchedulesController < ApplicationController
 
     @student = Student.find params[:student_id]
     @sche = Student.new.get_schedule params[:raw_schedule]
-    redirect_to new_student_path if (@sche.eql?"DATA_IS_INVAILD") || (@sche.eql?"NO_DATA")
   end
 
   protected

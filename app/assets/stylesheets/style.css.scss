@@ -170,6 +170,20 @@ iframe {
   padding-bottom: 35px;
 }
 
+.contact1-form-error {
+  display: block;
+  font-family: Montserrat-ExtraBold;
+  font-size: 16px;
+  color: #f10000;
+  line-height: 1.2;
+  text-align: center;
+  padding-bottom: 10px;
+
+  li {
+    list-style: none;
+  }
+}
+
 input.input1 {
   height: 50px;
   border-radius: 25px;

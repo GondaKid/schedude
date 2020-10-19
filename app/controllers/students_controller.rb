@@ -5,8 +5,20 @@ class StudentsController < ApplicationController
 
   def create
     @student = Student.new(student_param)
-    @student.save
-    redirect_to new_student_schedule_path(@student, raw_schedule: params[:student][:schedule])
+
+    parsed_data = Student.new.parse_data_for_hcmus @student.raw_schedule
+
+    if (parsed_data.eql?"DATA_IS_INVAILD") or (parsed_data.empty?)
+      flash[:errors] = "Data is invaild!"
+      redirect_to new_student_path
+    else
+      if @student.save
+        redirect_to new_student_schedule_path(@student, raw_schedule: @student.raw_schedule)
+      else
+        flash[:errors] = "Student id cannot be blank!"
+        redirect_to new_student_path
+      end
+    end
   end
 
   def show
@@ -18,6 +30,6 @@ class StudentsController < ApplicationController
 
   private
   def student_param
-    params.require(:student).permit(:student_id)
+    params.require(:student).permit(:student_id, :raw_schedule)
   end
 end
