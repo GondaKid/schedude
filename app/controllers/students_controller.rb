@@ -4,18 +4,20 @@ class StudentsController < ApplicationController
   end
 
   def create
+    @student = Student.find_by :student_id => params[:student][:student_id]
+    return redirect_to student_schedules_path(@student) unless @student.blank?
+
     @student = Student.new(student_param)
+    parsed_schedule = Student.new.parse_data_for_hcmus @student.raw_schedule
 
-    parsed_data = Student.new.parse_data_for_hcmus @student.raw_schedule
-
-    if (parsed_data.eql?"DATA_IS_INVAILD") or (parsed_data.empty?)
-      flash[:errors] = "Data is invaild!"
+    if (parsed_schedule.eql?"DATA_IS_INVAILD") or (parsed_schedule.empty?)
+      flash[:errors] = "Schedule is invaild!"
       redirect_to new_student_path
     else
       if @student.save
         redirect_to new_student_schedule_path(@student, raw_schedule: @student.raw_schedule)
       else
-        flash[:errors] = "Student id cannot be blank!"
+        flash[:errors] = "Please check your student ID!"
         redirect_to new_student_path
       end
     end

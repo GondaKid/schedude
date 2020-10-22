@@ -4,6 +4,7 @@ class Student < ApplicationRecord
 
   attr_accessor :raw_schedule
 
+  validates_length_of :student_id, :maximum => 10
   validates :student_id, :raw_schedule, presence: true
 
   def parse_data_for_hcmus(data = nil?)

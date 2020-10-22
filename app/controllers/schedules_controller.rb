@@ -9,8 +9,9 @@ class SchedulesController < ApplicationController
   def create
     @student = Student.find params[:student_id]
     schedule = params[:schedule]
-    schedule.each do |s|
-      subject = Subject.create(code: s[:code], name: s[:name], time: s[:time])
+    schedule.flatten.each do |s|
+      next if (s.nil?) || (s.empty?)
+      subject = Subject.create(code: s[:code], name: s[:name], time: s[:full_time])
       @student.subjects << subject
     end
     redirect_to student_schedules_path(@student)

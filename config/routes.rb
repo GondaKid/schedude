@@ -7,5 +7,4 @@ Rails.application.routes.draw do
 
   # root 'students#new'
   root 'welcome#index'
-
 end
