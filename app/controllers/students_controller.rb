@@ -15,7 +15,8 @@ class StudentsController < ApplicationController
       redirect_to new_student_path
     else
       if @student.save
-        redirect_to new_student_schedule_path(@student, raw_schedule: @student.raw_schedule)
+        redirect_post(overview_student_schedule_path(@student),
+          params: {raw_schedule: @student.raw_schedule}, options: {authenticity_token: :auto})
       else
         flash[:errors] = "Please check your student ID!"
         redirect_to new_student_path

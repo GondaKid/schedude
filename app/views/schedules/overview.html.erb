@@ -40,6 +40,9 @@
         <%= link_to raw('<i class="fas fa-heart"></i>'), student_schedules_path(@student, schedule: @sche.flatten), method: :post %>
     </div>
     <div class="row">
-        <a href="#" class="contact1-form-btn">ReNew</a>
+        <%= form_for overview_student_schedule_path(@student), local: true do |f| %>
+            <%= hidden_field_tag 'raw_schedule', @raw_schedule %>
+            <%= submit_tag 'ReNew', class: 'contact1-form-btn' %>
+        <% end %>
     </div>
 </div>
