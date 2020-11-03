@@ -22,6 +22,7 @@ class SchedulesController < ApplicationController
 
     @student = Student.find params[:student_id]
     @sche = Student.new.get_schedule params[:raw_schedule]
+    @week = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7']
   end
 
   protected

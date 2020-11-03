@@ -5,3 +5,7 @@ require("channels")
 
 require("bootstrap")
 require("jquery")
+
+$(document).on('turbolinks:load', function() {
+
+});
