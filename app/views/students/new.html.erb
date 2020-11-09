@@ -9,7 +9,7 @@
     <% end %>
 </span>
 
-<div class="contact1-form-error">
+<div id="errors" class="contact1-form-error">
     <% if flash[:errors] %>
     <%= flash[:errors] %>
     <% end %>
@@ -24,6 +24,28 @@
 </div>
 
 <div class="container-contact1-form-btn">
-    <%= f.submit "Create", class: 'contact1-form-btn'%>
+    <%= f.button "Create", type: 'submit', class: 'contact1-form-btn', :onclick => "return validateForm();" %>
 </div>
 <% end %>
+
+<script type="text/javascript">
+    function validateForm() {
+        var id = document.getElementById('student_student_id').value;
+        var schedule = document.getElementById('student_raw_schedule').value;
+        var err_outp = document.getElementById('errors');
+        err_outp.innerHTML = "";
+
+        if (id == '' || id.length > 10){
+            err_outp.innerHTML = "Student code is invalid!";
+        }
+        else if (schedule == '')
+        {
+            err_outp.innerHTML = "Schedule is empty!";
+        }
+        else{
+            return true;
+        }
+
+        return false;
+    }
+</script>
