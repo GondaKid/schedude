@@ -48,7 +48,7 @@
         <h5>Exclude days</h5>
         <% @week.each do |day| %>
           <div class="form-check form-check-inline">
-            <% if @excluded_days.any? day %>
+            <% if not @excluded_days.nil? and @excluded_days.any? day %>
               <%= check_box_tag 'exclude_days[]', day, true, class: 'form-check-input' %>
             <% else %>
               <%= check_box_tag 'exclude_days[]', day, false, class: 'form-check-input' %>
@@ -63,3 +63,24 @@
       </div>
     <% end %>
 </div>
+
+<script type="text/javascript">
+function mergeDuplicateRows() {
+  const previousRow = {};
+  const colsChanged = {};
+
+  Array.from(document.querySelectorAll('tbody tr')).forEach((tr, rowIdx) => {
+    Array.from(tr.children).forEach((td, colIdx) => {
+      if (rowIdx > 0 && previousRow[colIdx].text === td.innerText) {
+        previousRow[colIdx].elem.setAttribute('rowspan', ++previousRow[colIdx].span);
+        colsChanged[colIdx] = false;
+        td.remove();
+      } else {
+        previousRow[colIdx] = { span: 1, text: td.innerText, elem: td};
+        colsChanged[colIdx] = true;
+      }
+    });
+  });
+}
+mergeDuplicateRows();
+</script>
