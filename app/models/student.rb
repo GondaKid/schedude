@@ -33,7 +33,7 @@ class Student < ApplicationRecord
     end
   end
 
-  def get_subject_by_days(data = nil?)
+  def get_subject_by_days(data = nil?, *exclude_days)
     return "DATA_IS_INVAILD" if data.nil?
 
     data = parse_data_for_hcmus(data)
@@ -42,6 +42,11 @@ class Student < ApplicationRecord
     on = ["T2", "T3", "T4", "T5", "T6", "T7"]
     result = Array.new
     on.each do |on|
+      if exclude_days.flatten.any? on
+        result << []
+        next
+      end
+      
       days = Array.new
       data.select{|x| x[:on].eql? on}.each do |sbj|
         days << sbj
@@ -60,10 +65,10 @@ class Student < ApplicationRecord
     end
   end
 
-  def get_schedule(data = nil)
+  def get_schedule(data = nil, *exclude_days)
     return "DATA_IS_INVAILD" if data.nil?
 
-    data = get_subject_by_days(data)
+    data = get_subject_by_days(data, exclude_days)
 
     list = Array.new(6)
     # Each days

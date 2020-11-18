@@ -18,16 +18,20 @@
                     <tr>
                         <td><%= t %></td>
                         <% @sche.each do |sch| %>
+                          <% if sch.nil? %>
+                            <td></td>
+                            <% next %>
+                          <% end %>
                             <% sch_exists = 0 %>
                             <% sch.each do |s| %>
-                                <% if s[:time] === t %>
-                                    <td><%= s[:name] %>(<%= s[:code] %>)</td>
-                                    <% sch_exists = 1 %>
-                                    <% break %>
-                                <% end %>
+                              <% if s[:time] === t %>
+                                  <td><%= s[:name] %>(<%= s[:code] %>)</td>
+                                  <% sch_exists = 1 %>
+                                  <% break %>
+                              <% end %>
                             <% end %>
                             <% if sch_exists == 0 %>
-                                <td></td>
+                              <td></td>
                             <% end %>
                         <% end %>
                     </tr>
@@ -36,13 +40,26 @@
             </table>
         </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-3 mt-3">
         <%= link_to raw('<i class="fas fa-heart"></i>'), student_schedules_path(@student, schedule: @sche.flatten), method: :post %>
     </div>
-    <div class="row">
-        <%= form_for overview_student_schedule_path(@student), local: true do |f| %>
-            <%= hidden_field_tag 'raw_schedule', @raw_schedule %>
-            <%= submit_tag 'ReNew', class: 'contact1-form-btn' %>
+    <%= form_for overview_student_schedule_path(@student), local: true do |f| %>
+      <div class="row mb-3 mt-3">
+        <h5>Exclude days</h5>
+        <% @week.each do |day| %>
+          <div class="form-check form-check-inline">
+            <% if @excluded_days.any? day %>
+              <%= check_box_tag 'exclude_days[]', day, true, class: 'form-check-input' %>
+            <% else %>
+              <%= check_box_tag 'exclude_days[]', day, false, class: 'form-check-input' %>
+            <% end %>
+            <label class="form-check-label" for="inlineCheckbox1">&nbsp;<%= day %></label>
+          </div>
         <% end %>
-    </div>
+      </div>
+      <div class="row">
+        <%= hidden_field_tag 'raw_schedule', @raw_schedule %>
+        <%= submit_tag 'ReNew', class: 'contact1-form-btn' %>
+      </div>
+    <% end %>
 </div>

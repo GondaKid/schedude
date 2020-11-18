@@ -26,8 +26,9 @@ class SchedulesController < ApplicationController
 
     @raw_schedule = params[:raw_schedule]
     @student = Student.find params[:student_id]
-    @sche = Student.new.get_schedule params[:raw_schedule]
+    @sche = Student.new.get_schedule params[:raw_schedule], params[:exclude_days]
     @week = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7']
+    @excluded_days = params[:exclude_days]
 
     respond_to do |format|
       format.html
