@@ -18,21 +18,21 @@
                     <tr>
                         <td><%= t %></td>
                         <% @sche.each do |sch| %>
+                        <% puts "Sche================= #{sch} =========" %>
                           <% if sch.nil? %>
                             <td></td>
                             <% next %>
                           <% end %>
-                            <% sch_exists = 0 %>
-                            <% sch.each do |s| %>
-                              <% if s[:time] === t %>
-                                  <td><%= s[:name] %>(<%= s[:code] %>)</td>
-                                  <% sch_exists = 1 %>
-                                  <% break %>
-                              <% end %>
+                          <% sch_exists = 0 %>
+                          <% sch.each do |s| %>
+                            <% next if not s.is_a?(Hash)%>
+                            <% if s[:time] === t %>
+                                <td><%= s[:name] %> (<%= s[:code] %>)</td>
+                                <% sch_exists = 1 %>
+                                <% break %>
                             <% end %>
-                            <% if sch_exists == 0 %>
-                              <td></td>
-                            <% end %>
+                          <% end %>
+                          <% if sch_exists == 0 %><td></td><% end %>
                         <% end %>
                     </tr>
                     <% end %>

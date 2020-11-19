@@ -35,26 +35,23 @@ class Student < ApplicationRecord
 
   def get_subject_by_days(data = nil?, *exclude_days)
     return "DATA_IS_INVAILD" if data.nil?
-
     data = parse_data_for_hcmus(data)
     return if data.eql?"DATA_IS_INVAILD"
 
     on = ["T2", "T3", "T4", "T5", "T6", "T7"]
-    result = Array.new
+    result = []
     on.each do |on|
       if exclude_days.flatten.any? on
         result << []
         next
       end
       
-      days = Array.new
+      days = []
       data.select{|x| x[:on].eql? on}.each do |sbj|
         days << sbj
       end
-
       result << days
     end
-
     result
   end
 
@@ -70,32 +67,40 @@ class Student < ApplicationRecord
 
     data = get_subject_by_days(data, exclude_days)
 
-    list = Array.new(6)
+    list = Array.new(6, [])
+
     # Each days
     data.each_with_index do |v, index|
-      next if (v.empty?) || (v.nil?)
-      result = Array.new
+      if (v.empty?) || (v.nil?)
+        list[index] = []
+        next
+      end
+      result = []
       clone = v
       sbj = clone[rand(clone.count)]
 
       if clone.length == 1
         data = delete_by_subject_name(sbj[:name], data)
-        list[index] = sbj
+        list[index] << sbj
         next
       end
 
       clone.delete_if {|a| a[:name] == sbj[:name]}
-      atemp = Array.new
+      atemp = []
 
       loop do
-        # Processed
-        temp = rand(clone.count)
-        next if atemp.include? temp
-        atemp << temp
         break if atemp.length == clone.length
-        next_sbj = clone[temp]
-        next if next_sbj.nil?
+        temp = rand(clone.count)
 
+        next_sbj = clone[temp]
+        if atemp.include? temp
+          next
+        elsif sbj[:name].eql? next_sbj[:name] || next_sbj.nil?
+          atemp << temp
+          next
+        end
+
+        atemp << temp
         if !(sbj[:time].overlaps?next_sbj[:time])
           result << sbj
           result << next_sbj
@@ -106,7 +111,6 @@ class Student < ApplicationRecord
       # No result for combine subject
       if result.empty?
         # Get one
-        sbj = v[rand(v.count)]
         result << sbj
         data = delete_by_subject_name(sbj[:name], data)
       else
