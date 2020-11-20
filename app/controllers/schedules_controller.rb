@@ -9,7 +9,7 @@ class SchedulesController < ApplicationController
   def create
     @student = Student.find params[:student_id]
     schedule = params[:schedule]
-    schedule.flatten.each do |s|
+    schedule.each do |s|
       next if (s.nil?) || (s.empty?)
       subject = Subject.create(code: s[:code], name: s[:name], time: s[:full_time])
       @student.subjects << subject

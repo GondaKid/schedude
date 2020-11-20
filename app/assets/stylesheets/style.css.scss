@@ -394,3 +394,24 @@ textarea.input1 {
     opacity: 1;
   }
 }
+/* Style buttons */
+.btn {
+  background-color: none;
+  border: none;
+  color: black;
+  cursor: pointer;
+}
+
+.btn:hover {
+  color: RoyalBlue;
+}
+
+/* Sticky column */
+tbody td:first-child {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: #fff;
+  opacity: 0.7;
+}

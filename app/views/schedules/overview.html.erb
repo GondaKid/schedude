@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="table-responsive">
-            <table class="table table-hover table-bordered">
+            <table class="table table-hover table-bordered table-sm">
                 <thead align="center">
                     <tr class="table-primary">
                         <th scope="col"></th>
@@ -18,7 +18,6 @@
                     <tr>
                         <td><%= t %></td>
                         <% @sche.each do |sch| %>
-                        <% puts "Sche================= #{sch} =========" %>
                           <% if sch.nil? %>
                             <td></td>
                             <% next %>
@@ -41,10 +40,18 @@
         </div>
     </div>
     <div class="row mb-3 mt-3">
-        <%= link_to raw('<i class="fas fa-heart"></i>'), student_schedules_path(@student, schedule: @sche.flatten), method: :post %>
+      <%= form_for @student, :url => student_schedules_path(@student), method: :post, local: true do |f| %>
+        <% @sche.flatten.each do |s| %>
+          <% s.each do |k, v| %>
+            <%= hidden_field_tag 'schedule[][' + k.to_s + ']', v %>
+          <% end %>
+        <% end %>
+        <%= button_tag raw('<i class="fas fa-heart"></i>'), type: 'submit', class: 'btn' %>
+      <% end %>
     </div>
+    <hr />
     <%= form_for overview_student_schedule_path(@student), local: true do |f| %>
-      <div class="row mb-3 mt-3">
+      <div class="row mb-4 mt-3">
         <h5>Exclude days</h5>
         <% @week.each do |day| %>
           <div class="form-check form-check-inline">
@@ -57,7 +64,7 @@
           </div>
         <% end %>
       </div>
-      <div class="row">
+      <div class="row justify-content-center">
         <%= hidden_field_tag 'raw_schedule', @raw_schedule %>
         <%= submit_tag 'ReNew', class: 'contact1-form-btn' %>
       </div>
