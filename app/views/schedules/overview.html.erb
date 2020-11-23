@@ -39,7 +39,7 @@
             </table>
         </div>
     </div>
-    <div class="row mb-3 mt-3">
+    <div class="row mb-2 mt-3">
       <%= form_for @student, :url => student_schedules_path(@student), method: :post, local: true do |f| %>
         <% @sche.flatten.each do |s| %>
           <% s.each do |k, v| %>
@@ -49,27 +49,22 @@
         <%= button_tag raw('<i class="fas fa-heart"></i>'), type: 'submit', class: 'btn' %>
       <% end %>
     </div>
-    <hr />
     <%= form_for overview_student_schedule_path(@student), local: true do |f| %>
-      <div class="row mb-4 mt-3">
-        <h5>Exclude days</h5>
-        <% @week.each do |day| %>
-          <div class="form-check form-check-inline">
-            <% if not @excluded_days.nil? and @excluded_days.any? day %>
-              <%= check_box_tag 'exclude_days[]', day, true, class: 'form-check-input' %>
-            <% else %>
-              <%= check_box_tag 'exclude_days[]', day, false, class: 'form-check-input' %>
-            <% end %>
-            <label class="form-check-label" for="inlineCheckbox1">&nbsp;<%= day %></label>
-          </div>
-        <% end %>
-      </div>
-      <div class="row justify-content-center">
+      <div class="row mb-3 justify-content-center">
         <%= hidden_field_tag 'raw_schedule', @raw_schedule %>
         <%= submit_tag 'ReNew', class: 'contact1-form-btn' %>
       </div>
+      <hr />
+      <div class="row" style="margin: 0px;">
+        <button class="btn" style="padding: 0px;" type="button" onclick="createOptionsGroup();"><i class="fas fa-plus"></i> Exclude days and times</button>
+      </div>
+      <hr />
+      <div class="row mb-3 mt-3" id="optionGroup" style="margin: 0px;">
+      </div>
     <% end %>
 </div>
+
+<input type="hidden" id="exclude_json" value="<%= @excluded_days %>">
 
 <script type="text/javascript">
 function mergeDuplicateRows() {
@@ -90,4 +85,60 @@ function mergeDuplicateRows() {
   });
 }
 mergeDuplicateRows();
+</script>
+
+<script type="text/javascript">
+  function createOptionsGroup(on = "", from = "1", to = "10")
+  {
+    var numItems = $('#optionGroup .input-group').length;
+    if(numItems == 6) return;
+    
+    var group = '<div class="input-group mb-2" id="optionGroup' +numItems+ '">';
+    var dayOptions = '<select class="custom-select" name="exclude[][on]" id="selectDate' +numItems+ '" required>' +
+              '<option value="T2">T2</option>' +
+              '<option value="T3">T3</option>' +
+              '<option value="T4">T4</option>' +
+              '<option value="T5">T5</option>' +
+              '<option value="T6">T6</option>' +
+              '<option value="T7">T7</option>' +
+            '</select>';
+    var inputFrom = '<input type="number" name="exclude[][x]" id="txtFrom' +numItems+ '" class="form-control" placeholder="From" value="' +from+ '" min="1" max="10" step="1" required/>'
+    var inputTo = '<input type="number" name="exclude[][y]]" id="txtTo' +numItems+ '" class="form-control" placeholder="To" value="' +to+ '" min="1" max="10" step="1" required/>'
+    var deleteButton = '<div class="input-group-append"><button class="btn" id="delGroup' +numItems+ '" type="button"><i class="fas fa-trash-alt"></i></button></div></div>';
+    $('#optionGroup').append(group + dayOptions + inputFrom + inputTo + deleteButton);
+    $(document).on('click', '#delGroup'+numItems , function() {
+      $('#optionGroup'+numItems).remove();
+    });
+    $(document).on('change', '#txtFrom'+numItems , function() {
+      var on = $('#selectDate'+numItems + ' option:selected').val();
+      var x = Number($('#txtFrom'+numItems).val());
+      var y = Number($('#txtTo'+numItems).val());
+      if(x >= y || x.length == 0)
+      {
+        //alert('Please check time start on ' + on +'!');
+        $('#txtFrom'+numItems).val('1');
+      }
+    });
+    $(document).on('change', '#txtTo'+numItems , function() {
+      var on = $('#selectDate'+numItems + ' option:selected').val();
+      var x = Number($('#txtFrom'+numItems).val());
+      var y = Number($('#txtTo'+numItems).val());
+      if(x >= y || y.length == 0)
+      {
+        //alert('Please check time end on ' + on +'!');
+        $('#txtTo'+numItems).val('10');
+      }
+    });
+
+    $('#selectDate' +numItems).val(on);
+  }
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var exclude_day_and_time = $('#exclude_json').val();
+    $.each(JSON.parse(exclude_day_and_time), function(i, ex){
+      createOptionsGroup(ex.on, ex.x, ex.y);
+    });
+  });
 </script>
