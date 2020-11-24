@@ -16,31 +16,37 @@
 </div>
 
 <div class="wrap-input1 validate-input">
-    <%= f.text_field :student_id , class: 'input1', placeholder: 'Student ID'%>
+    <%= f.text_field :student_id , class: 'input1 dashboard-tooltip', placeholder: 'Mã số sinh viên của bạn', 'data-toggle'=>"tooltip", 'title'=>'Bỏ qua lịch học và nhấn tiếp tục nếu bạn muốn xem lại lịch học đã lưu!', 'data-placement' => 'top' %>
 </div>
 
 <div class="wrap-input1 validate-input">
-    <%= f.text_area :raw_schedule, class: 'input1', placeholder: 'Your schedule' %>
+    <%= f.text_area :raw_schedule, class: 'input1', placeholder: 'Paste lịch học của bạn vào đây' %>
 </div>
 
 <div class="container-contact1-form-btn">
-    <%= f.button "Create", type: 'submit', class: 'contact1-form-btn', :onclick => "return validateForm();" %>
+    <%= f.button "Tiếp tục", type: 'submit', class: 'contact1-form-btn', :onclick => "return validateForm();" %>
 </div>
 <% end %>
+
+<div class="row mt-2 mr-2 ml-2 text-center">
+    <p>(Hiện tại chỉ hỗ trợ cho trường Đại học Khoa học Tự nhiên, chúng tôi sẽ tiếp tục cập nhật thêm
+    các trường khác trong thời gian tới. Have fun!!)</p>
+</div>
+
+<script type="text/javascript">
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
 
 <script type="text/javascript">
     function validateForm() {
         var id = document.getElementById('student_student_id').value;
-        var schedule = document.getElementById('student_raw_schedule').value;
         var err_outp = document.getElementById('errors');
         err_outp.innerHTML = "";
 
         if (id == '' || id.length > 10){
-            err_outp.innerHTML = "Student code is invalid!";
-        }
-        else if (schedule == '')
-        {
-            err_outp.innerHTML = "Schedule is empty!";
+            err_outp.innerHTML = "Mã số sinh viên không hợp lệ!";
         }
         else{
             return true;

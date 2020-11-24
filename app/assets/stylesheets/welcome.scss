@@ -200,8 +200,9 @@ body {
     }
   }
   .features-width {
-    flex-basis: 61%;
+    flex-basis: 95%;
     @media (max-width: 767px) {
+      margin: 10px;
       flex-basis: 100%;
     }
   }

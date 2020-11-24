@@ -1,67 +1,68 @@
 <span class="contact1-form-title">
-    YOUR SCHEDUDE
+    Thời khóa biểu đề xuất cho bạn
 </span>
 <div class="container">
-    <div class="row">
-        <div class="table-responsive">
-            <table class="table table-hover table-bordered table-sm">
-                <thead align="center">
-                    <tr class="table-primary">
-                        <th scope="col"></th>
-                        <% @week.each do |w| %>
-                        <th scope="col"><%= w %></th>
-                        <% end %>
-                    </tr>
-                </thead>
-                <tbody align="center">
-                    <% (1..10).each do |t| %>
-                    <tr>
-                        <td><%= t %></td>
-                        <% @sche.each do |sch| %>
-                          <% if sch.nil? %>
-                            <td></td>
-                            <% next %>
-                          <% end %>
-                          <% sch_exists = 0 %>
-                          <% sch.each do |s| %>
-                            <% next if not s.is_a?(Hash)%>
-                            <% if s[:time] === t %>
-                                <td><%= s[:name] %> (<%= s[:code] %>)</td>
-                                <% sch_exists = 1 %>
-                                <% break %>
-                            <% end %>
-                          <% end %>
-                          <% if sch_exists == 0 %><td></td><% end %>
-                        <% end %>
-                    </tr>
+  <%= form_for overview_student_schedule_path(@student), class: 'form-inline', local: true do |f| %>
+    <hr />
+    <div class="row" style="margin: 0px;">
+      <button class="btn2" style="padding: 0px;" type="button" onclick="createOptionsGroup();"><i class="fas fa-plus"></i> Bộ lọc</button>
+      <span class="ml-1 text-muted text-center">&nbsp;(Loại bỏ những khoảng thời gian học không mong muốn)</span>
+    </div>
+    <hr />
+    <div class="row mb-3 mt-3" id="optionGroup" style="margin: 0px;">
+    </div>
+    <div class="row mb-3 justify-content-center">
+      <%= hidden_field_tag 'raw_schedule', @raw_schedule %>
+      <%= button_tag raw('<i class="fas fa-sync"></i>&nbsp;Tạo lại'), type: 'submit', class: 'btn2' %>
+    </div>
+  <% end %>
+  <div class="row">
+      <div class="table-responsive">
+          <table class="table table-hover table-bordered table-sm">
+              <thead align="center">
+                  <tr class="table-primary">
+                    <th scope="col"></th>
+                    <% @week.each do |w| %>
+                    <th scope="col"><%= w %></th>
                     <% end %>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row mb-2 mt-3">
-      <%= form_for @student, :url => student_schedules_path(@student), method: :post, local: true do |f| %>
-        <% @sche.flatten.each do |s| %>
-          <% s.each do |k, v| %>
-            <%= hidden_field_tag 'schedule[][' + k.to_s + ']', v %>
-          <% end %>
+                  </tr>
+              </thead>
+              <tbody align="center">
+                  <% (1..10).each do |t| %>
+                  <tr>
+                    <td><%= t %></td>
+                    <% @sche.each do |sch| %>
+                      <% if sch.nil? %>
+                        <td></td>
+                        <% next %>
+                      <% end %>
+                      <% sch_exists = 0 %>
+                      <% sch.each do |s| %>
+                        <% next if not s.is_a?(Hash)%>
+                        <% if s[:time] === t %>
+                          <td><%= s[:name] %> (<%= s[:code] %>)</td>
+                          <% sch_exists = 1 %>
+                          <% break %>
+                        <% end %>
+                      <% end %>
+                      <% if sch_exists == 0 %><td></td><% end %>
+                    <% end %>
+                  </tr>
+                  <% end %>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  <div class="row mb-2 mt-3">
+    <%= form_for @student, :url => student_schedules_path(@student), method: :post, local: true do |f| %>
+      <% @sche.flatten.each do |s| %>
+        <% s.each do |k, v| %>
+          <%= hidden_field_tag 'schedule[][' + k.to_s + ']', v %>
         <% end %>
-        <%= button_tag raw('<i class="fas fa-heart"></i>'), type: 'submit', class: 'btn' %>
       <% end %>
-    </div>
-    <%= form_for overview_student_schedule_path(@student), local: true do |f| %>
-      <div class="row mb-3 justify-content-center">
-        <%= hidden_field_tag 'raw_schedule', @raw_schedule %>
-        <%= submit_tag 'ReNew', class: 'contact1-form-btn' %>
-      </div>
-      <hr />
-      <div class="row" style="margin: 0px;">
-        <button class="btn" style="padding: 0px;" type="button" onclick="createOptionsGroup();"><i class="fas fa-plus"></i> Exclude days and times</button>
-      </div>
-      <hr />
-      <div class="row mb-3 mt-3" id="optionGroup" style="margin: 0px;">
-      </div>
+      <%= button_tag raw('<i class="fas fa-heart"></i>&nbsp;Lưu lại'), type: 'submit', class: 'btn2', style: 'font-size: 18px !important;' %>
     <% end %>
+  </div>
 </div>
 
 <input type="hidden" id="exclude_json" value="<%= @excluded_days %>">
@@ -93,8 +94,10 @@ mergeDuplicateRows();
     var numItems = $('#optionGroup .input-group').length;
     if(numItems == 6) return;
     
-    var group = '<div class="input-group mb-2" id="optionGroup' +numItems+ '">';
-    var dayOptions = '<select class="custom-select" name="exclude[][on]" id="selectDate' +numItems+ '" required>' +
+    var group = '<div class="input-group mb-2 dashboard-tooltip" id="optionGroup' +numItems+ '">';
+    var dayOptions = '<select class="form-control form-control-sm" name="exclude[][on]" ' +
+              'id="selectDate' +numItems+ '" data-toggle="tooltip" data-placement="top" ' +
+              'title="Chọn thứ" required>' +
               '<option value="T2">T2</option>' +
               '<option value="T3">T3</option>' +
               '<option value="T4">T4</option>' +
@@ -102,9 +105,14 @@ mergeDuplicateRows();
               '<option value="T6">T6</option>' +
               '<option value="T7">T7</option>' +
             '</select>';
-    var inputFrom = '<input type="number" name="exclude[][x]" id="txtFrom' +numItems+ '" class="form-control" placeholder="From" value="' +from+ '" min="1" max="10" step="1" required/>'
-    var inputTo = '<input type="number" name="exclude[][y]]" id="txtTo' +numItems+ '" class="form-control" placeholder="To" value="' +to+ '" min="1" max="10" step="1" required/>'
-    var deleteButton = '<div class="input-group-append"><button class="btn" id="delGroup' +numItems+ '" type="button"><i class="fas fa-trash-alt"></i></button></div></div>';
+    var inputFrom = '<input type="number" name="exclude[][x]" id="txtFrom' +numItems+ '" ' + 
+              'class="form-control form-control-sm dashboard-tooltip" placeholder="From" value="' +from+ '" ' + 
+              'min="1" max="10" step="1" data-toggle="tooltip" data-placement="top" title="Chọn ca bắt đầu (1-10)" required/>'
+    var inputTo = '<input type="number" name="exclude[][y]]" id="txtTo' +numItems+ '" ' +
+              'class="form-control form-control-sm dashboard-tooltip" placeholder="To" value="' +to+ '" min="1" max="10" ' + 
+              'step="1" data-toggle="tooltip" data-placement="top" title="Chọn ca kết thúc (1-10)" required/>'
+    var deleteButton = '<div class="ml-2"><button class="btn2" id="delGroup' +numItems+ '" type="button">' + 
+              '<i class="fas fa-trash-alt"></i></button></div></div>';
     $('#optionGroup').append(group + dayOptions + inputFrom + inputTo + deleteButton);
     $(document).on('click', '#delGroup'+numItems , function() {
       $('#optionGroup'+numItems).remove();
@@ -141,4 +149,11 @@ mergeDuplicateRows();
       createOptionsGroup(ex.on, ex.x, ex.y);
     });
   });
+</script>
+
+<script type="text/javascript">
+$('body').tooltip({
+    selector: '[data-toggle="tooltip"]',
+    container: 'body'
+});
 </script>

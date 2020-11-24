@@ -139,7 +139,7 @@ iframe {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 130px 100px 118px;
+  padding: 40px 130px 30px 118px;
 }
 
 /*------------------------------------------------------------------
@@ -395,7 +395,7 @@ textarea.input1 {
   }
 }
 /* Style buttons */
-.btn {
+.btn2 {
   background-color: none;
   border: none;
   color: black;
@@ -403,8 +403,8 @@ textarea.input1 {
   font-size: 16px !important;
 }
 
-.btn:hover {
-  color: RoyalBlue;
+.btn2:hover {
+  color: #ee6f57;
 }
 
 table {

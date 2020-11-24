@@ -11,14 +11,14 @@ class StudentsController < ApplicationController
     parsed_schedule = Student.new.parse_data_for_hcmus @student.raw_schedule
 
     if (parsed_schedule.eql?"DATA_IS_INVAILD") or (parsed_schedule.empty?)
-      flash[:errors] = "Schedule is invaild!"
+      flash[:errors] = "Dữ liệu lịch học không hợp lệ!"
       redirect_to new_student_path
     else
       if @student.save
         redirect_post(overview_student_schedule_path(@student),
           params: {raw_schedule: @student.raw_schedule}, options: {authenticity_token: :auto})
       else
-        flash[:errors] = "Please check your student ID!"
+        flash[:errors] = "Mã số sinh viên không hợp lệ!"
         redirect_to new_student_path
       end
     end

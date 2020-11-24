@@ -2,8 +2,9 @@
 <html>
 
 <head>
-  <title>Schedude</title>
+  <title>Schedude - Tạo thời khóa biểu thật dễ dàng</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -25,44 +26,43 @@
   </header>
   <div class="banner">
     <div class="container">
-      <h1 class="font-weight-bold">Simple and easy-to-use schedule generator.</h1>
-      <h6 class="font-weight-normal text-muted pt-1 pb-3">Schedude helps saving your time on planning schedule with
-        conflict-free worry.</h6>
+      <h3 class="font-weight-bold">Tạo Thời Khóa Biểu thật đơn giản và dễ dàng</h3>
+      <h6 class="font-weight-normal text-muted pt-1 pb-3"><b>Schedude</b> giúp bạn dễ dàng tạo ra một thời khóa 
+      biểu cho riêng mình, với tùy chọn bỏ qua thời gian học không mong muốn!</h6>
       <div class="">
-        <%=link_to  '<button type="button" class="btn btn-opacity-light">Try Schedule</button>'.html_safe, controller: 'students', action: 'new'%>
+        <%=link_to '<button type="button" class="btn btn-opacity-light">Sử dụng Schedude</button>'.html_safe, controller: 'students', action: 'new'%>
       </div>
-      <%= image_tag  "description.svg", height: '333', width: '444', :class => "img-fluid m-5" %>
+      <%= image_tag  "description.svg", height: '200', width: '300', :class => "img-fluid mb-5 mt-5" %>
     </div>
   </div>
   <div class="content-wrapper">
-    <div class="container pb-5 mb-5">
+    <div class="container mb-5">
       <section class="features-overview" id="features-section">
         <div class="content-header">
-          <h2 class="font-weight-bold">How to Schedude</h2>
+          <h3 class="font-weight-bold">Ba bước sử dụng Schedude</h3>
         </div>
         <div class="d-md-flex justify-content-between">
-          <div class="grid-margin d-flex justify-content-start">
+          <div class="grid-margin d-flex justify-content-start" style="justify-items: center;">
             <div class="features-width">
               <%= image_tag  "share.svg", :class => "img-icons" %>
-
-              <h5 class="py-3">Let Schedude<br>know your classes</h5>
-              <p class="text-muted">Copy your available classes and<br>select which class you are interested in.</p>
+              <h5 class="py-3">Chọn dữ liệu lịch học</h5>
+              <%= image_tag  "use-step-1.gif", :class => "img-fluid" %>
             </div>
           </div>
           <div class="grid-margin d-flex justify-content-center">
             <div class="features-width">
               <%= image_tag  "click.svg", :class => "img-icons" %>
 
-              <h5 class="py-3">One-click<br>generate</h5>
-              <p class="text-muted">Fast and automatically.<br>Re&#8209;generate until you find suitable one.</p>
+              <h5 class="py-3">Tạo thời khóa biểu</h5>
+              <%= image_tag  "use-step-2.gif", :class => "img-fluid" %>
             </div>
           </div>
           <div class="grid-margin d-flex justify-content-end">
             <div class="features-width">
               <%= image_tag  "save.svg", :class => "img-icons" %>
 
-              <h5 class="py-3">Save for later</h5>
-              <p class="text-muted">Your schedule is always here in case you forgot.</p>
+              <h5 class="py-3">Lưu trữ cho lần sau</h5>
+              <%= image_tag  "use-step-3.gif", :class => "img-fluid" %>
             </div>
           </div>
         </div>
