@@ -17,10 +17,6 @@ class SchedulesController < ApplicationController
     redirect_to student_schedules_path(@student)
   end
 
-  def new
-
-  end
-
   def overview
     save_all_subject params[:raw_schedule]
 
@@ -38,6 +34,10 @@ class SchedulesController < ApplicationController
   protected
   def grid_params
     params.fetch(:schedules_grid, {}).permit!
+  end
+
+  def overview_params
+    params.fetch(:raw_schedule, :student_id).permit!
   end
 
   def save_all_subject raw_schedule
