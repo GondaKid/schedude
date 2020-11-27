@@ -116,18 +116,12 @@ iframe {
   background: -o-linear-gradient(left, #f7917d, #ee6f57);
   background: -moz-linear-gradient(left, #f7917d, #ee6f57);
   background: linear-gradient(left, #f7917d, #ee6f57);
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
 
 .container-contact1 {
-  width: 1263px;
+  width: 100%;
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -139,7 +133,17 @@ iframe {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 130px 30px 118px;
+  padding: 40px 130px 40px 118px;
+}
+
+.container-contact2 {
+  width: 100%;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 130px 40px 118px;
 }
 
 /*------------------------------------------------------------------

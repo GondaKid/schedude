@@ -1,8 +1,20 @@
-<div class="mx-auto d-flex flex-column">
-  <div class="mx-auto mb-5">
-    <h3 class="text-center">Thời Khóa biểu của <%= @student.student_id%></h3>
+<div class="container-contact2">
+  <div class="row justify-content-center mb-3">
+      <%= link_to root_path do %>
+      <%= image_tag  "logo.svg", height: '65', width: '213', :class => "img-icons" %>
+      <% end %>
   </div>
-  <%= paginate(@grid.assets) %>
-  <%= datagrid_table @grid %>
-  <%= paginate(@grid.assets) %>
+  <div class="row">
+    <div class="mx-auto d-flex flex-column">
+      <div class="mx-auto mb-3">
+        <h4 class="text-center">Thời Khóa biểu của <strong><%= @student.student_id%></strong></h4>
+      </div>
+      <%= paginate(@grid.assets) %>
+      <%= datagrid_table @grid %>
+      <%= paginate(@grid.assets) %>
+    </div>
+  </div>
+  <div class="text-center mt-3">
+    <%= link_to 'Quay lại trang chủ', root_path %>
+  </div>
 </div>

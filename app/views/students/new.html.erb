@@ -1,36 +1,38 @@
-<div class="contact1-pic">
-    <%= image_tag "schedule.png" %>
-</div>
+<div class="container-contact1">
+    <div class="contact1-pic">
+        <%= image_tag "schedule.png" %>
+    </div>
 
-<%= form_with scope: :student, url: students_path, class: "contact1-form validate-form", local: true do |f| %>
-<span class="contact1-form-title">
-    <%= link_to root_path do %>
-    <%= image_tag  "logo.svg", height: '65', width: '213', :class => "img-icons" %>
+    <%= form_with scope: :student, url: students_path, class: "contact1-form validate-form", local: true do |f| %>
+    <span class="contact1-form-title">
+        <%= link_to root_path do %>
+        <%= image_tag  "logo.svg", height: '65', width: '213', :class => "img-icons" %>
+        <% end %>
+    </span>
+
+    <div id="errors" class="contact1-form-error">
+        <% if flash[:errors] %>
+        <%= flash[:errors] %>
+        <% end %>
+    </div>
+
+    <div class="wrap-input1 validate-input">
+        <%= f.text_field :student_id , class: 'input1 dashboard-tooltip', placeholder: 'Mã số sinh viên của bạn', 'data-toggle'=>"tooltip", 'title'=>'Bỏ qua lịch học và nhấn tiếp tục nếu bạn muốn xem lại lịch học đã lưu!', 'data-placement' => 'top' %>
+    </div>
+
+    <div class="wrap-input1 validate-input">
+        <%= f.text_area :raw_schedule, class: 'input1', placeholder: 'Dán lịch học của bạn vào đây' %>
+    </div>
+
+    <div class="container-contact1-form-btn">
+        <%= f.button "Tiếp tục", type: 'submit', class: 'contact1-form-btn', :onclick => "return validateForm();" %>
+    </div>
     <% end %>
-</span>
 
-<div id="errors" class="contact1-form-error">
-    <% if flash[:errors] %>
-    <%= flash[:errors] %>
-    <% end %>
-</div>
-
-<div class="wrap-input1 validate-input">
-    <%= f.text_field :student_id , class: 'input1 dashboard-tooltip', placeholder: 'Mã số sinh viên của bạn', 'data-toggle'=>"tooltip", 'title'=>'Bỏ qua lịch học và nhấn tiếp tục nếu bạn muốn xem lại lịch học đã lưu!', 'data-placement' => 'top' %>
-</div>
-
-<div class="wrap-input1 validate-input">
-    <%= f.text_area :raw_schedule, class: 'input1', placeholder: 'Paste lịch học của bạn vào đây' %>
-</div>
-
-<div class="container-contact1-form-btn">
-    <%= f.button "Tiếp tục", type: 'submit', class: 'contact1-form-btn', :onclick => "return validateForm();" %>
-</div>
-<% end %>
-
-<div class="row mt-2 mr-2 ml-2 text-center">
-    <p>(Hiện tại chỉ hỗ trợ cho trường Đại học Khoa học Tự nhiên, chúng tôi sẽ tiếp tục cập nhật thêm
-    các trường khác trong thời gian tới. Have fun!!)</p>
+    <div class="row mt-2 mr-2 ml-2 text-center">
+        <p>(Hiện tại chỉ hỗ trợ cho trường <strong>Đại học Khoa học Tự nhiên</strong>, chúng tôi sẽ tiếp tục cập nhật thêm
+        các trường khác trong thời gian tới. Have fun!!)</p>
+    </div>
 </div>
 
 <script type="text/javascript">

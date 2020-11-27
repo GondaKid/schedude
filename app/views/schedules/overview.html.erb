@@ -1,67 +1,72 @@
-<span class="contact1-form-title">
+<div class="container-contact2">
+  <span class="contact1-form-title">
     Thời khóa biểu đề xuất cho bạn
-</span>
-<div class="container">
-  <%= form_for overview_student_schedule_path(@student), class: 'form-inline', local: true do |f| %>
-    <hr />
-    <div class="row" style="margin: 0px;">
-      <button class="btn2" style="padding: 0px;" type="button" onclick="createOptionsGroup();"><i class="fas fa-plus"></i> Bộ lọc</button>
-      <span class="ml-1 text-muted text-center">&nbsp;(Loại bỏ những khoảng thời gian học không mong muốn)</span>
-    </div>
-    <hr />
-    <div class="row mb-3 mt-3" id="optionGroup" style="margin: 0px;">
-    </div>
-    <div class="row mb-3 justify-content-center">
-      <%= hidden_field_tag 'raw_schedule', @raw_schedule %>
-      <%= button_tag raw('<i class="fas fa-sync"></i>&nbsp;Tạo lại'), type: 'submit', class: 'btn2' %>
-    </div>
-  <% end %>
-  <div class="row">
-      <div class="table-responsive">
-          <table class="table table-hover table-bordered table-sm">
-              <thead align="center">
-                  <tr class="table-primary">
-                    <th scope="col"></th>
-                    <% @week.each do |w| %>
-                    <th scope="col"><%= w %></th>
-                    <% end %>
-                  </tr>
-              </thead>
-              <tbody align="center">
-                  <% (1..10).each do |t| %>
-                  <tr>
-                    <td><%= t %></td>
-                    <% @sche.each do |sch| %>
-                      <% if sch.nil? %>
-                        <td></td>
-                        <% next %>
-                      <% end %>
-                      <% sch_exists = 0 %>
-                      <% sch.each do |s| %>
-                        <% next if not s.is_a?(Hash)%>
-                        <% if s[:time] === t %>
-                          <td><%= s[:name] %> (<%= s[:code] %>)</td>
-                          <% sch_exists = 1 %>
-                          <% break %>
-                        <% end %>
-                      <% end %>
-                      <% if sch_exists == 0 %><td></td><% end %>
-                    <% end %>
-                  </tr>
-                  <% end %>
-              </tbody>
-          </table>
+  </span>
+  <div class="container">
+    <%= form_for overview_student_schedule_path(@student), class: 'form-inline', local: true do |f| %>
+      <hr />
+      <div class="row" style="margin: 0px;">
+        <button class="btn2" style="padding: 0px;" type="button" onclick="createOptionsGroup();"><i class="fas fa-plus"></i> Bộ lọc</button>
+        <span class="ml-1 text-muted text-center">&nbsp;(Loại bỏ những khoảng thời gian học không mong muốn)</span>
       </div>
-  </div>
-  <div class="row mb-2 mt-3">
-    <%= form_for @student, :url => student_schedules_path(@student), method: :post, local: true do |f| %>
-      <% @sche.flatten.each do |s| %>
-        <% s.each do |k, v| %>
-          <%= hidden_field_tag 'schedule[][' + k.to_s + ']', v %>
-        <% end %>
-      <% end %>
-      <%= button_tag raw('<i class="fas fa-heart"></i>&nbsp;Lưu lại'), type: 'submit', class: 'btn2', style: 'font-size: 18px !important;' %>
+      <hr />
+      <div class="row mb-3 mt-3" id="optionGroup" style="margin: 0px;">
+      </div>
+      <div class="row mb-3 justify-content-center">
+        <%= hidden_field_tag 'raw_schedule', @raw_schedule %>
+        <%= button_tag raw('<i class="fas fa-sync"></i>&nbsp;Tạo lại'), type: 'submit', class: 'btn2' %>
+      </div>
     <% end %>
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered table-sm">
+                <thead align="center">
+                    <tr class="table-primary">
+                      <th scope="col"></th>
+                      <% @week.each do |w| %>
+                      <th scope="col"><%= w %></th>
+                      <% end %>
+                    </tr>
+                </thead>
+                <tbody align="center">
+                    <% (1..10).each do |t| %>
+                    <tr>
+                      <td><%= t %></td>
+                      <% @sche.each do |sch| %>
+                        <% if sch.nil? %>
+                          <td></td>
+                          <% next %>
+                        <% end %>
+                        <% sch_exists = 0 %>
+                        <% sch.each do |s| %>
+                          <% next if not s.is_a?(Hash)%>
+                          <% if s[:time] === t %>
+                            <td><%= s[:name] %> (<%= s[:code] %>)</td>
+                            <% sch_exists = 1 %>
+                            <% break %>
+                          <% end %>
+                        <% end %>
+                        <% if sch_exists == 0 %><td></td><% end %>
+                      <% end %>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row mb-2 mt-3">
+      <%= form_for @student, :url => student_schedules_path(@student), method: :post, local: true do |f| %>
+        <% @sche.flatten.each do |s| %>
+          <% s.each do |k, v| %>
+            <%= hidden_field_tag 'schedule[][' + k.to_s + ']', v %>
+          <% end %>
+        <% end %>
+        <%= button_tag raw('<i class="fas fa-heart"></i>&nbsp;Lưu lại'), type: 'submit', class: 'btn2', style: 'font-size: 18px !important;' %>
+      <% end %>
+    </div>
+    <div class="text-center mt-3">
+      <%= link_to 'Quay lại trang chủ', root_path %>
+    </div>
   </div>
 </div>
 
