@@ -6,9 +6,9 @@ class StudentsController < ApplicationController
   def create
     student_id = params[:student][:student_id]
     @student = Student.find_by :student_id => student_id
-    if not Student.exists?(student_id: student_id)
+    if @student.nil?
       @student = Student.new(student_param)
-      if not @student.save
+      if @student.save
         flash[:errors] = "Có lỗi xảy ra khi lưu dữ liệu!"
         return redirect_to new_student_path
       end
@@ -30,9 +30,6 @@ class StudentsController < ApplicationController
 
   def show
     @student = Student.find params[:id]
-    @grid = ModelsGrid.new(params[:my_report]) do |scope|
-      scope.page(params[:page]) # See pagination section
-    end
   end
 
   private
