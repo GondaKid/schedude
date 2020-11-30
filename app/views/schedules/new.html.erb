@@ -3,7 +3,10 @@
     Thời khóa biểu đề xuất cho bạn
   </span>
   <div class="container">
-    <%= form_for overview_student_schedule_path(@student), class: 'form-inline', local: true do |f| %>
+    <%= form_for new_student_schedule_path(@student), class: 'form-inline', method: :get, local: true do |f| %>
+      <% @list_subject_id.each do |id| %>
+        <%= hidden_field_tag 'sids[]', id %>
+      <% end %>
       <hr />
       <div class="row" style="margin: 0px;">
         <button class="btn2" style="padding: 0px;" type="button" onclick="createOptionsGroup();"><i class="fas fa-plus"></i> Bộ lọc</button>
@@ -13,7 +16,6 @@
       <div class="row mb-3 mt-3" id="optionGroup" style="margin: 0px;">
       </div>
       <div class="row mb-3 justify-content-center">
-        <%= hidden_field_tag 'raw_schedule', @raw_schedule %>
         <%= button_tag raw('<i class="fas fa-sync"></i>&nbsp;Tạo lại'), type: 'submit', class: 'btn2' %>
       </div>
     <% end %>
@@ -32,21 +34,13 @@
                     <% (1..10).each do |t| %>
                     <tr>
                       <td><%= t %></td>
-                      <% @sche.each do |sch| %>
-                        <% if sch.nil? %>
+                      <% @week.each do |on| %>
+                        <% subject = @sche.detect { |s| s.on == on and s.range === t } %>
+                        <% if not subject.nil? %>
+                          <td><%= subject.name %></td>
+                        <% else %>
                           <td></td>
-                          <% next %>
                         <% end %>
-                        <% sch_exists = 0 %>
-                        <% sch.each do |s| %>
-                          <% next if not s.is_a?(Hash)%>
-                          <% if s[:time] === t %>
-                            <td><%= s[:name] %> (<%= s[:code] %>)</td>
-                            <% sch_exists = 1 %>
-                            <% break %>
-                          <% end %>
-                        <% end %>
-                        <% if sch_exists == 0 %><td></td><% end %>
                       <% end %>
                     </tr>
                     <% end %>
@@ -56,10 +50,8 @@
     </div>
     <div class="row mb-2 mt-3">
       <%= form_for @student, :url => student_schedules_path(@student), method: :post, local: true do |f| %>
-        <% @sche.flatten.each do |s| %>
-          <% s.each do |k, v| %>
-            <%= hidden_field_tag 'schedule[][' + k.to_s + ']', v %>
-          <% end %>
+        <% @sche.each do |s| %>
+          <%= hidden_field_tag 'subject_id[]', s.id %>
         <% end %>
         <%= button_tag raw('<i class="fas fa-heart"></i>&nbsp;Lưu lại'), type: 'submit', class: 'btn2', style: 'font-size: 18px !important;' %>
       <% end %>
@@ -70,7 +62,7 @@
   </div>
 </div>
 
-<input type="hidden" id="exclude_json" value="<%= @excluded_days %>">
+<input type="hidden" id="exclude_json" value="<%= @excluded_days.to_json %>">
 
 <script type="text/javascript">
 function mergeDuplicateRows() {
@@ -148,7 +140,7 @@ mergeDuplicateRows();
 </script>
 
 <script type="text/javascript">
-  $(document).ready(function() {
+  $(document).on("turbolinks:load", function(){
     var exclude_day_and_time = $('#exclude_json').val();
     $.each(JSON.parse(exclude_day_and_time), function(i, ex){
       createOptionsGroup(ex.on, ex.x, ex.y);

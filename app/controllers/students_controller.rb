@@ -4,23 +4,27 @@ class StudentsController < ApplicationController
   end
 
   def create
-    @student = Student.find_by :student_id => params[:student][:student_id]
-    return redirect_to student_schedules_path(@student) unless @student.blank?
-
-    @student = Student.new(student_param)
-    parsed_schedule = Student.new.parse_data_for_hcmus @student.raw_schedule
-
-    if (parsed_schedule.eql?"DATA_IS_INVAILD") or (parsed_schedule.empty?)
-      flash[:errors] = "Dữ liệu lịch học không hợp lệ!"
-      redirect_to new_student_path
-    else
-      if @student.save
-        redirect_post(overview_student_schedule_path(@student),
-          params: {raw_schedule: @student.raw_schedule}, options: {authenticity_token: :auto})
-      else
-        flash[:errors] = "Mã số sinh viên không hợp lệ!"
-        redirect_to new_student_path
+    student_id = params[:student][:student_id]
+    @student = Student.find_by :student_id => student_id
+    if not Student.exists?(student_id: student_id)
+      @student = Student.new(student_param)
+      if not @student.save
+        flash[:errors] = "Có lỗi xảy ra khi lưu dữ liệu!"
+        return redirect_to new_student_path
       end
+    else
+      return redirect_to student_schedules_path(@student) unless Enrollment.find_by(
+                                                          :student_id => @student.id).nil?
+    end
+    
+    schedule = Schedule.new
+    list_schedule = schedule.parse_data_for_hcmus(params[:student][:raw_schedule])
+    if list_schedule.nil? or params[:student][:raw_schedule].length < 1
+      flash[:errors] = "Dữ liệu lịch học không hợp lệ!"
+      return redirect_to new_student_path
+    else
+      list_schedule_id = schedule.save_subject_if_not_exists(list_schedule)
+      return redirect_to new_student_schedule_path(@student, sids: list_schedule_id)
     end
   end
 

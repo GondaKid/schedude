@@ -6,45 +6,25 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def new
+    @student = Student.find params[:student_id]
+    @list_subject_id = params[:sids]
+    @week = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7']
+    @sche = Schedule.new.get_schedule(params[:sids], params[:exclude])
+    @excluded_days = params[:exclude]
+  end
+
   def create
     @student = Student.find params[:student_id]
-    schedule = params[:schedule]
-    schedule.each do |s|
-      next if (s.nil?) || (s.empty?)
-      subject = Subject.create(code: s[:code], name: s[:name], time: s[:full_time])
+    params[:subject_id].each do |id|
+      subject = Subject.find(id)
       @student.subjects << subject
     end
     redirect_to student_schedules_path(@student)
   end
 
-  def overview
-    save_all_subject params[:raw_schedule]
-
-    @raw_schedule = params[:raw_schedule]
-    @student = Student.find params[:student_id]
-    @sche = Student.new.get_schedule params[:raw_schedule], params[:exclude]
-    @week = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7']
-    @excluded_days = params[:exclude].to_json
-
-    respond_to do |format|
-      format.html
-    end
-  end
-
   protected
   def grid_params
     params.fetch(:schedules_grid, {}).permit!
-  end
-
-  def overview_params
-    params.fetch(:raw_schedule, :student_id).permit!
-  end
-
-  def save_all_subject raw_schedule
-    Student.new.get_subject_by_days(raw_schedule).flatten.each do |s|
-      if Subject.find_by(code: s[:code], name: s[:name], time: s[:full_time]).nil?
-        Subject.create(code: s[:code], name: s[:name], time: s[:full_time])
-      end
-    end
   end
 end
