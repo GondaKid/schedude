@@ -4,10 +4,10 @@ class StudentsController < ApplicationController
   end
 
   def create
-    student_id = params[:student][:student_id]
+    student_id = params[:student_id]
     @student = Student.find_by :student_id => student_id
     if @student.nil?
-      @student = Student.new(student_param)
+      @student = Student.new(student_id)
       if @student.save
         flash[:errors] = "Có lỗi xảy ra khi lưu dữ liệu!"
         return redirect_to new_student_path
@@ -18,8 +18,8 @@ class StudentsController < ApplicationController
     end
     
     schedule = Schedule.new
-    list_schedule = schedule.parse_data_for_hcmus(params[:student][:raw_schedule])
-    if list_schedule.nil? or params[:student][:raw_schedule].length < 1
+    list_schedule = schedule.parse_data_for_hcmus(params[:raw_schedule])
+    if list_schedule.nil? or params[:raw_schedule].length < 1
       flash[:errors] = "Dữ liệu lịch học không hợp lệ!"
       return redirect_to new_student_path
     else
@@ -34,6 +34,6 @@ class StudentsController < ApplicationController
 
   private
   def student_param
-    params.require(:student).permit(:student_id, :raw_schedule)
+    params.permit(:student_id, :raw_schedule)
   end
 end

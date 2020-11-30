@@ -3,7 +3,7 @@
         <%= image_tag "schedule.png" %>
     </div>
 
-    <%= form_with scope: :student, url: students_path, class: "contact1-form validate-form", local: true do |f| %>
+    <%= form_with url: students_path, class: "contact1-form validate-form", local: true do |f| %>
     <span class="contact1-form-title">
         <%= link_to root_path do %>
         <%= image_tag  "logo.svg", height: '65', width: '213', :class => "img-icons" %>
