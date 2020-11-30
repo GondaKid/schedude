@@ -1,9 +1,9 @@
 class SchedulesController < ApplicationController
   def index
     @student = Student.find_by id: params[:student_id]
-    @grid = SchedulesGrid.new(grid_params) do |scope|
-      scope.joins(:students).joins(:enrollments).where("students.student_id = '#{@student.student_id}'").distinct.page(params[:page])
-    end
+    return redirect_to root_path if @student.nil?
+    @week = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7']
+    @sche = Subject.joins(:students).joins(:enrollments).where("students.student_id = '#{@student.student_id}'").distinct
   end
 
   def new
