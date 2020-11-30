@@ -11,6 +11,7 @@ class SchedulesController < ApplicationController
     @list_subject_id = params[:sids]
     @week = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7']
     @sche = Schedule.new.get_schedule(params[:sids], params[:exclude])
+    return redirect_to root_path if @sche.nil?
     @excluded_days = params[:exclude]
   end
 

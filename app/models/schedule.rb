@@ -1,21 +1,21 @@
 class Schedule
 	def parse_data_for_hcmus(raw_data)
-    return nil if raw_data.nil?
-    begin
-      result = []
-      raw_data.split("\n").each do |line|
-		next if line.empty?
-        arr = line.split("\t")
-        subject = Hash.new
-        subject[:code] = arr[2]
-        subject[:name] = arr[1]
-        subject[:time] = arr[7].match(/.+?(?=-P)/)[0]
-        result << subject
-      end
-      result
-    rescue
-      nil
-    end
+		return nil if raw_data.nil?
+		begin
+		  result = []
+		  raw_data.split("\n").each do |line|
+			next if line.empty?
+			arr = line.split("\t")
+			subject = Hash.new
+			subject[:code] = arr[2]
+			subject[:name] = arr[1]
+			subject[:time] = arr[7].match(/.+?(?=-P)/)[0]
+			result << subject
+		end
+		  result
+		rescue
+		  nil
+		end
 	end
 	
 	def save_subject_if_not_exists(list_subject)
@@ -34,7 +34,11 @@ class Schedule
 
 	def get_list_subject(list_subject_id)
 		return nil if list_subject_id.nil?
-		list_subject = Subject.find(list_subject_id)
+    begin
+      list_subject = Subject.find(list_subject_id)
+    rescue
+      nil
+    end
 	end
 
 	def delete_subject_by_name(list_subject, value)
@@ -43,7 +47,9 @@ class Schedule
 
 	def get_schedule(list_subject_id, excluded)
 		return nil if list_subject_id.nil?
-		list_subject = get_list_subject(list_subject_id)
+    list_subject = get_list_subject(list_subject_id)
+    return nil if list_subject.nil?
+    
 		if not excluded.nil?
 			excluded.each do |e|
 				list_subject.reject! { |s| s.on.eql? e[:on] and s.range.overlaps?(e[:x].to_i..e[:y].to_i) }
