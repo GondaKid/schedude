@@ -7,8 +7,8 @@ class StudentsController < ApplicationController
     student_id = params[:student_id]
     @student = Student.find_by :student_id => student_id
     if @student.nil?
-      @student = Student.new(student_id)
-      if @student.save
+      @student = Student.new(:student_id => student_id)
+      if not @student.save
         flash[:errors] = "Có lỗi xảy ra khi lưu dữ liệu!"
         return redirect_to new_student_path
       end
