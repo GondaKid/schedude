@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
+  get 'messenger', to: 'messenger#hook'
+  post 'messenger', to: 'messenger#recipient'
 
   resources :students do
     resources :schedules
