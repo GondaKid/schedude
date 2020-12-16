@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_085216) do
     t.string "student_id", limit: 10, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "recipient_id"
+    t.string "recipient_id"
   end
 
   create_table "subjects", force: :cascade do |t|
