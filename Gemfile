@@ -34,3 +34,7 @@ end
 
 gem 'font-awesome-sass', '~> 5.13'
 gem 'kaminari'
+#To make http request
+gem 'excon'
+
+gem 'dotenv-rails', groups: [:development, :test]
